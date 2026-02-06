@@ -18,4 +18,9 @@ public class StudentController {
     public String checkGithub(){
         return "welcome to Git Hub World";
     }
+
+    @GetMapping("/cid")
+    public String checkCicd(){
+        return "welcome to Ci/cd World";
+    }
 }

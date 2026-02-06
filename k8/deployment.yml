@@ -14,15 +14,15 @@ spec:
     spec:
       containers:
         - name: zdocker-container
-          image: zdocker-app:latest
-          imagePullPolicy: IfNotPresent
+          image: sabzar123/zdocker-app:latest
           ports:
             - containerPort: 8080
-          env: # Environment variables belong here, under the container
+          imagePullPolicy: Always
+          # ADD THIS SECTION BELOW
+          env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://host.docker.internal:5432/Zdocker
-            # You might also need these if your DB has a password:
-            #- name: SPRING_DATASOURCE_USERNAME
-            #  value: postgres
-            #- name: SPRING_DATASOURCE_PASSWORD
-            #  value: yourpassword
+              value: jdbc:postgresql://postgres:5432/Zdocker
+            - name: SPRING_DATASOURCE_USERNAME
+              value: razbas
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: razbas

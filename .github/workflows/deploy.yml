@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "master" ] # Matches your current branch name
+    branches: [ "master" ]
 
 jobs:
   build-and-push:
@@ -33,5 +33,4 @@ jobs:
         with:
           context: .
           push: true
-          # Using DOCKER_USERNAME secret ensures the tag is valid and dynamic
           tags: ${{ secrets.DOCKER_USERNAME }}/zdocker-app:latest
