@@ -23,4 +23,9 @@ public class StudentController {
     public String checkCicd(){
         return "welcome to Ci/cd World";
     }
+
+    @GetMapping("/test")
+    public String finall(){
+        return "welcome to test World";
+    }
 }
