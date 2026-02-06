@@ -1,19 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: customer-deployment
+  name: zdocker-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: customer
+      app: zdocker-app
   template:
     metadata:
       labels:
-        app: customer
+        app: zdocker-app
     spec:
       containers:
-        - name: customer-container
-          image: yourdockerhub/customer-service:latest
+        - name: zdocker-container
+          image: zdocker-app:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+          env: # Environment variables belong here, under the container
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://host.docker.internal:5432/Zdocker
+            # You might also need these if your DB has a password:
+            #- name: SPRING_DATASOURCE_USERNAME
+            #  value: postgres
+            #- name: SPRING_DATASOURCE_PASSWORD
+            #  value: yourpassword
