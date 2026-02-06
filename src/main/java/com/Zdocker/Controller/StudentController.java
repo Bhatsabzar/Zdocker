@@ -13,4 +13,9 @@ public class StudentController {
     public String Check(){
         return "Welcome to Docker World";
     }
+
+    @GetMapping("/git")
+    public String checkGithub(){
+        return "welcome to Git Hub World";
+    }
 }

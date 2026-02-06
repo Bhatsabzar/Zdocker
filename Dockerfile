@@ -1,15 +1,13 @@
-# Step 1: Use a lightweight Java 17 runtime as the base
-FROM eclipse-temurin:17-jre-alpine
-
-# Step 2: Set the working directory inside the container
+# Stage 1: Build the JAR
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Step 3: Copy the JAR file from your target folder into the container
-# We rename it to 'app.jar' for simplicity
+# Stage 2: Create the final image
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+# This catches your 'Zdocker-0.0.1-SNAPSHOT.jar'
 COPY target/Zdocker-0.0.1-SNAPSHOT.jar app.jar
-
-# Step 4: Tell Docker which port the app runs on
 EXPOSE 8080
-
-# Step 5: Command to run the JAR when the container starts
 ENTRYPOINT ["java", "-jar", "app.jar"]
